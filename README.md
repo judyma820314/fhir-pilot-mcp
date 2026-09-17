@@ -58,7 +58,7 @@ Server runs on `http://localhost:3000`.
 
 ## Context
 
-Built as a demonstration of AI-native development in the SAP healthcare space — specifically around the integration between hospital information systems (like Avelios Medical) and SAP S/4HANA via HDSF. The tool design mirrors the real HDSF API surface documented at [help.sap.com](https://help.sap.com/docs/SAP_HEALTH_DATA_SERVICES_FOR_FHIR).
+Built as a demonstration of AI-native development in the SAP healthcare space — specifically around the integration between hospital information systems and SAP S/4HANA via HDSF. The tool design mirrors the real HDSF API surface documented at [help.sap.com](https://help.sap.com/docs/SAP_HEALTH_DATA_SERVICES_FOR_FHIR).
 
 ## Tech stack
 
