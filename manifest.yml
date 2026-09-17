@@ -1,0 +1,19 @@
+---
+applications:
+  - name: fhir-pilot
+    memory: 256M
+    instances: 1
+    buildpacks:
+      - nodejs_buildpack
+    command: npm start
+    health-check-type: http
+    health-check-http-endpoint: /health
+    env:
+      NODE_ENV: production
+      # Set real values with: cf set-env fhir-pilot BTP_TOKEN_URL <value>
+      BTP_TOKEN_URL: ""
+      BTP_CLIENT_ID: ""
+      BTP_CLIENT_SECRET: ""
+      CF_API_URL: https://api.cf.eu10-004.hana.ondemand.com
+      HDSF_BASE_URL: ""
+      S4_TENANT_URL: ""
