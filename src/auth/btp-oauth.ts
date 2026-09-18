@@ -5,21 +5,30 @@ export interface BtpTokenResponse {
   scope: string;
 }
 
-// TODO: Replace with real OAuth 2.0 client credentials grant:
-//   POST {tokenUrl}
-//   Content-Type: application/x-www-form-urlencoded
-//   Body: grant_type=client_credentials&client_id=...&client_secret=...
 export async function getBtpToken(
-  _tokenUrl: string,
-  _clientId: string,
-  _clientSecret: string,
-  scope = 'openid',
+  tokenUrl: string,
+  clientId: string,
+  clientSecret: string,
+  scope = '',
 ): Promise<BtpTokenResponse> {
-  console.warn('[MOCK] getBtpToken — returning mock token');
-  return {
-    access_token: `mock-token-${Date.now()}`,
-    token_type: 'Bearer',
-    expires_in: 3600,
-    scope,
+  const params: Record<string, string> = {
+    grant_type: 'client_credentials',
+    client_id: clientId,
+    client_secret: clientSecret,
   };
+  if (scope) params.scope = scope;
+  const body = new URLSearchParams(params);
+
+  const response = await fetch(tokenUrl, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: body.toString(),
+  });
+
+  if (!response.ok) {
+    const text = await response.text();
+    throw new Error(`BTP token request failed: ${response.status} ${text}`);
+  }
+
+  return response.json() as Promise<BtpTokenResponse>;
 }
